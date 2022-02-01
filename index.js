@@ -1,6 +1,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
-const { productsRouter } = require('./src/routes/productsRoutes');
+const { productsRouter } = require('./routes/productsRoutes');
 
 require('dotenv').config();
 

@@ -5,7 +5,6 @@ const createProduct = async (name, quantity) => {
     'INSERT INTO StoreManager.products (name, quantity) VALUES (?, ?)',
     [name, quantity],
   );
-  console.log(newProduct);
   return {
     id: newProduct.insertId,
     name,
