@@ -21,7 +21,14 @@ const isValidQuantity = (quantity) => {
   return {};
 };
 
+const findById = (id, verify) => {
+  if (verify.some((product) => product.id === Number(id))) return {};
+  
+  return { code: 404, message: 'Product not found' };
+};
+
 module.exports = {
   isValidName,
   isValidQuantity,
+  findById,
 };
