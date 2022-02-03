@@ -4,6 +4,7 @@ const {
   getAllProducts,
   getProductById,
   updateProduct,
+  deleteProduct,
 } = require('../controllers/productsController');
 
 const productsRouter = express.Router();
@@ -15,6 +16,8 @@ productsRouter.get('/', getAllProducts);
 productsRouter.get('/:id', getProductById);
 
 productsRouter.put('/:id', updateProduct);
+
+productsRouter.delete('/:id', deleteProduct);
 
 module.exports = {
   productsRouter,

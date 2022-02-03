@@ -51,9 +51,22 @@ const updateProduct = async (name, quantity, id) => {
 
   if (validateQuantity.message) return validateQuantity;
 
-  const alteredProduct = await productsModel.updateProduct(name, quantity, id);
+  const changedProduct = await productsModel.updateProduct(name, quantity, id);
 
-  return alteredProduct;
+  return changedProduct;
+};
+
+const deleteProduct = async (id) => {
+  const allProducts = await productsModel.getAllProducts();
+  const exist = findById(id, allProducts);
+
+  if (exist.message) return exist;
+
+  const deletedProduct = allProducts.find((product) => product.id === Number(id));
+
+  await productsModel.deleteProduct(id);
+
+  return { id: deletedProduct.id, name: deletedProduct.name, quantity: deletedProduct.quantity };
 };
 
 module.exports = {
@@ -61,4 +74,5 @@ module.exports = {
   getAllProducts,
   getProductById,
   updateProduct,
+  deleteProduct,
 };

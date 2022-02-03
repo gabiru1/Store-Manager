@@ -27,7 +27,7 @@ const isValidQuantity = (quantity) => {
 
 const findById = (id, verify) => {
   if (verify.some((product) => product.id === Number(id))) return {};
-  
+
   return { code: 404, message: 'Product not found' };
 };
 
