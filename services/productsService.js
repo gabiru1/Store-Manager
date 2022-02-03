@@ -1,10 +1,18 @@
 const productsModel = require('../models/productsModel');
-const { isValidName, isValidQuantity, findById } = require('../schemas/productsSchemas');
+const {
+  isValidName,
+  isValidQuantity,
+  findById,
+  productExist,
+} = require('../schemas/productsSchemas');
 
 const createProduct = async (name, quantity) => {
   const allProducts = await productsModel.getAllProducts();
   const validateName = isValidName(name, allProducts);
   const validateQuantity = isValidQuantity(quantity);
+  const exist = productExist(name, allProducts);
+
+  if (exist.message) return exist;
 
   if (validateName.message) return validateName;
 
@@ -35,6 +43,9 @@ const updateProduct = async (name, quantity, id) => {
   const allProducts = await productsModel.getAllProducts();
   const validateName = isValidName(name, allProducts);
   const validateQuantity = isValidQuantity(quantity);
+  const productNotFound = findById(id, allProducts);
+
+  if (productNotFound.message) return productNotFound;
 
   if (validateName.message) return validateName;
 

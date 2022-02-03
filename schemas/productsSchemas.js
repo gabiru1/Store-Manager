@@ -1,10 +1,14 @@
-const isValidName = (name, verify) => {
+const isValidName = (name) => {
   if (!name) return { code: 400, message: '"name" is required' };
 
   if (name.length < 5) {
   return { code: 422, message: '"name" length must be at least 5 characters long' };
 }
 
+  return {};
+};
+
+const productExist = (name, verify) => {
   if (verify.some((product) => product.name === name)) {
     return { code: 409, message: 'Product already exists' };
   }
@@ -15,7 +19,7 @@ const isValidName = (name, verify) => {
 const isValidQuantity = (quantity) => {
   if (typeof quantity === 'string' || quantity <= 0) {
     return { code: 422, message: '"quantity" must be a number larger than or equal to 1' };
-  } 
+  }
   if (!quantity) return { code: 400, message: '"quantity" is required' };
 
   return {};
@@ -29,6 +33,7 @@ const findById = (id, verify) => {
 
 module.exports = {
   isValidName,
+  productExist,
   isValidQuantity,
   findById,
 };

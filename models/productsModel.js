@@ -32,7 +32,7 @@ const updateProduct = async (name, quantity, id) => {
     [name, quantity, id],
   );
   console.log(alteredProduct);
-  return alteredProduct;
+  return { id, name, quantity };
 };
 
 module.exports = {
