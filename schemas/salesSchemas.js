@@ -18,7 +18,14 @@ const validateQuantity = (sales) => {
   return {};
 };
 
+const findById = (id, sales) => {
+  if (sales.some((sale) => sale.saleId === Number(id))) return {};
+
+  return { code: 404, message: 'Sale not found' };
+};
+
 module.exports = {
   validateProducts,
   validateQuantity,
+  findById,
 };

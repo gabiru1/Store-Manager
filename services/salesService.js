@@ -1,5 +1,5 @@
 const salesModel = require('../models/salesModel');
-const { validateProducts, validateQuantity } = require('../schemas/salesSchemas');
+const { validateProducts, validateQuantity, findById } = require('../schemas/salesSchemas');
 
 const createSale = async (sale) => {
   const isValidProducts = validateProducts(sale);
@@ -19,6 +19,25 @@ const createSale = async (sale) => {
   return response;
 };
 
+const getAllSales = async () => {
+  const allSales = await salesModel.getAllSales();
+
+  return allSales;
+};
+
+const getSaleById = async (id) => {
+  const allSales = await salesModel.getAllSales();
+  const exist = findById(id, allSales);
+
+  if (exist.message) return exist;
+
+  const saleById = await salesModel.getSaleById(id);
+
+  return saleById;
+};
+
 module.exports = {
   createSale,
+  getAllSales,
+  getSaleById,
 };
