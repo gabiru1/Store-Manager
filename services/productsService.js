@@ -8,7 +8,7 @@ const {
 
 const createProduct = async (name, quantity) => {
   const allProducts = await productsModel.getAllProducts();
-  const validateName = isValidName(name, allProducts);
+  const validateName = isValidName(name);
   const validateQuantity = isValidQuantity(quantity);
   const exist = productExist(name, allProducts);
 
