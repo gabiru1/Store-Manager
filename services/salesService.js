@@ -36,8 +36,25 @@ const getSaleById = async (id) => {
   return saleById;
 };
 
+const updateSale = async (id, sale) => {
+  const isValidProducts = validateProducts(sale);
+  const isValidQuantity = validateQuantity(sale);
+
+  if (isValidProducts.message) return isValidProducts;
+
+  if (isValidQuantity.message) return isValidQuantity;
+
+  await salesModel.updateSale(id, sale);
+
+  return {
+    saleId: Number(id),
+    itemUpdated: sale,
+  };
+};
+
 module.exports = {
   createSale,
   getAllSales,
   getSaleById,
+  updateSale,
 };
